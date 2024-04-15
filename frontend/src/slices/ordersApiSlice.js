@@ -1,5 +1,5 @@
 import { apiSlice } from "./apiSlice";
-import { ORDERS_API_URL, PAYPAL_URL } from "../constants";
+import { ORDERS_API_URL } from "../constants";
 
 export const ordersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -20,10 +20,6 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
         method: "PUT",
         body: { ...details },
       }),
-    }),
-    getPaypalClientId: builder.query({
-      query: () => PAYPAL_URL,
-      keepUnusedDataFor: 5,
     }),
     fetchOrders: builder.query({
       query: () => ORDERS_API_URL,
@@ -54,7 +50,6 @@ export const {
   useGetOrderDetailsQuery,
   useFetchOrdersQuery,
   usePayOrderMutation,
-  useGetPaypalClientIdQuery,
   useGetMyOrdersQuery,
   useGetOrdersQuery,
   useDeliverOrderMutation,
