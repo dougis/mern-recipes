@@ -1,0 +1,11 @@
+meta {
+  name: Update Profile
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseURL}}/users/profile
+  body: formUrlEncoded
+  auth: none
+}

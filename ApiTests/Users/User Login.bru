@@ -1,0 +1,16 @@
+meta {
+  name: User Login
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseURL}}/users/login
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  email: doug@email.com
+  password: 123456
+}
