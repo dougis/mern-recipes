@@ -1,0 +1,16 @@
+meta {
+  name: Admin Login
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseURL}}/users/login
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  email: admin%40email.com
+  password: 123456
+}
