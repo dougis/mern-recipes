@@ -19,14 +19,9 @@ import AdminRoute from "./components/AdminRoute";
 
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
-import CartScreen from "./screens/CartScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import OrderListScreen from "./screens/admin/OrderListScreen";
 import UserListScreen from "./screens/admin/UserListScreen";
 import ProductListScreen from "./screens/admin/ProductListScreen";
 import ProductEditScreen from "./screens/admin/ProductEditScreen";
@@ -42,20 +37,15 @@ const router = createBrowserRouter(
       <Route path="/search/:keyword" element={<HomeScreen />} />
       <Route path="/page/:pageNumber" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
-      <Route path="/cart" element={<CartScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
 
       {/* Routes which require you to be logged in */}
       <Route path="" element={<PrivateRoute />}>
-        <Route path="/shipping" element={<ShippingScreen />} />
-        <Route path="/placeorder" element={<PlaceOrderScreen />} />
-        <Route path="/orders/:id" element={<OrderScreen />} />
         <Route path="/profile" element={<ProfileScreen />} />
       </Route>
       {/* Routes which require you to be an admin */}
       <Route path="" element={<AdminRoute />}>
-        <Route path="/admin/orderlist" element={<OrderListScreen />} />
         <Route path="/admin/productlist" element={<ProductListScreen />} />
         <Route
           path="/admin/productlist/:pageNumber"

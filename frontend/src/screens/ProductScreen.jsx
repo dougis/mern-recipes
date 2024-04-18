@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   Form,
   Row,
@@ -9,7 +9,7 @@ import {
   Card,
   Button,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
@@ -20,12 +20,9 @@ import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "../slices/productsApiSlice";
-import { addToCart } from "../slices/cartSlice";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -41,10 +38,6 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
-  const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }));
-    navigate("/cart");
-  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -141,16 +134,6 @@ const ProductScreen = () => {
                       </Row>
                     </ListGroup.Item>
                   )}
-                  <ListGroup.Item>
-                    <Button
-                      className="btn-block"
-                      type="button"
-                      disabled={product.countInStock === 0}
-                      onClick={addToCartHandler}
-                    >
-                      Add To Cart
-                    </Button>
-                  </ListGroup.Item>
                 </ListGroup>
               </Card>
             </Col>
