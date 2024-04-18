@@ -20,7 +20,6 @@ import {
   useGetProductDetailsQuery,
   useCreateReviewMutation,
 } from "../slices/productsApiSlice";
-import { addToCart } from "../slices/cartSlice";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -41,10 +40,6 @@ const ProductScreen = () => {
     useCreateReviewMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
-  const addToCartHandler = () => {
-    dispatch(addToCart({ ...product, qty }));
-    navigate("/cart");
-  };
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -141,16 +136,6 @@ const ProductScreen = () => {
                       </Row>
                     </ListGroup.Item>
                   )}
-                  <ListGroup.Item>
-                    <Button
-                      className="btn-block"
-                      type="button"
-                      disabled={product.countInStock === 0}
-                      onClick={addToCartHandler}
-                    >
-                      Add To Cart
-                    </Button>
-                  </ListGroup.Item>
                 </ListGroup>
               </Card>
             </Col>
