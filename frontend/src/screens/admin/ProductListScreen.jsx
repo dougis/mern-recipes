@@ -36,7 +36,7 @@ const ProductListScreen = () => {
             err.message ||
             createError?.data?.message ||
             createError?.message ||
-            "An error occurred"
+            "An error occurred",
         );
       }
     }
@@ -53,7 +53,7 @@ const ProductListScreen = () => {
             err.message ||
             createError?.data?.message ||
             createError?.message ||
-            "An error occurred"
+            "An error occurred",
         );
       }
     }
