@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var cookbooksModel = new Schema({
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
+const cookbooksModel = new Schema({
   name: { type: String, required: true },
   chapters: [
     {
@@ -18,3 +18,4 @@ var cookbooksModel = new Schema({
     },
   ],
 });
+export default mongoose.model("cookbooks", cookbooksModel);

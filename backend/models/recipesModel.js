@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var recipesModel = new Schema({
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
+const recipesModel = new Schema({
   recipe_key: { type: Number, required: true },
   name: { type: String, required: true },
   ingredients: { type: String, required: true },
@@ -13,4 +13,4 @@ var recipesModel = new Schema({
   preparations: [{ type: String, required: true }],
   courses: [{ type: String, required: true }],
 });
-module.exports = mongoose.model("recipes", recipesModel);
+export default mongoose.model("recipes", recipesModel);

@@ -1,5 +1,5 @@
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-var preparationsModel = new Schema({
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
+const preparationsModel = new Schema({
   preparation: { type: String, required: true },
 });
