@@ -14,6 +14,7 @@ import { logout } from "../slices/authSlice";
 import SearchBox from "./SearchBox";
 
 import logo from "../assets/logo.png";
+
 const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -27,19 +28,23 @@ const Header = () => {
       navigate("/login");
     } catch (error) {}
   };
+
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+      <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <NavbarBrand>
-              <img src={logo} alt="ProShop" />
-              ProShop
-            </NavbarBrand>
+            <Navbar.Brand>Recipe App</Navbar.Brand>
           </LinkContainer>
-          <Navbar.Toggle aria-activedescendant="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              <LinkContainer to="/recipes">
+                <Nav.Link>Recipes</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/sources">
+                <Nav.Link>Sources</Nav.Link>
+              </LinkContainer>
               <SearchBox />
 
               {userInfo ? (
