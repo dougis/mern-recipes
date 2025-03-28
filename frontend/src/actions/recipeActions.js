@@ -13,10 +13,7 @@ export const listRecipes = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "RECIPE_LIST_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -34,10 +31,7 @@ export const getRecipeById = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "RECIPE_DETAILS_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -66,10 +60,7 @@ export const createRecipe = (recipe) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "RECIPE_CREATE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -102,10 +93,7 @@ export const updateRecipe = (recipe) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "RECIPE_UPDATE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -132,10 +120,7 @@ export const deleteRecipe = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "RECIPE_DELETE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };

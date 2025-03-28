@@ -13,10 +13,7 @@ export const listSources = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "SOURCE_LIST_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -34,10 +31,7 @@ export const getSourceById = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "SOURCE_DETAILS_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -66,10 +60,7 @@ export const createSource = (source) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "SOURCE_CREATE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -102,10 +93,7 @@ export const updateSource = (source) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "SOURCE_UPDATE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
@@ -132,10 +120,7 @@ export const deleteSource = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: "SOURCE_DELETE_FAIL",
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: error.response?.data?.message || error.message,
     });
   }
 };
