@@ -18,6 +18,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import AdminRoute from "./components/AdminRoute";
 
 import HomeScreen from "./screens/HomeScreen";
+import RecipesScreen from "./screens/RecipesScreen";
+import SourcesScreen from "./screens/SourcesScreen";
+import RecipeEditScreen from "./screens/RecipeEditScreen";
+import SourceEditScreen from "./screens/SourceEditScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ProfileScreen from "./screens/ProfileScreen";
@@ -28,6 +32,12 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
+      <Route path="/recipes" element={<RecipesScreen />} />
+      <Route path="/recipes/:id/edit" element={<RecipeEditScreen />} />
+      <Route path="/recipes/create" element={<RecipeEditScreen />} />
+      <Route path="/sources" element={<SourcesScreen />} />
+      <Route path="/sources/:id/edit" element={<SourceEditScreen />} />
+      <Route path="/sources/create" element={<SourceEditScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
 

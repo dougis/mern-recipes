@@ -1,13 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Formik } from "formik";
 import * as Yup from "yup";
