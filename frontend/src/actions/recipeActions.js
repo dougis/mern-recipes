@@ -1,22 +1,24 @@
 import axios from "axios";
 
-export const listRecipes = () => async (dispatch) => {
-  try {
-    dispatch({ type: "RECIPE_LIST_REQUEST" });
+export const listRecipes =
+  (pageNumber = 1) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: "RECIPE_LIST_REQUEST" });
 
-    const { data } = await axios.get("/api/recipes");
+      const { data } = await axios.get(`/api/recipes?pageNumber=${pageNumber}`);
 
-    dispatch({
-      type: "RECIPE_LIST_SUCCESS",
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: "RECIPE_LIST_FAIL",
-      payload: error.response?.data?.message || error.message,
-    });
-  }
-};
+      dispatch({
+        type: "RECIPE_LIST_SUCCESS",
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: "RECIPE_LIST_FAIL",
+        payload: error.response?.data?.message || error.message,
+      });
+    }
+  };
 
 export const getRecipeById = (id) => async (dispatch) => {
   try {

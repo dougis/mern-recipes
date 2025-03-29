@@ -6,6 +6,8 @@ import { FaEdit, FaTrash, FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { listRecipes, deleteRecipe } from "../actions/recipeActions";
 import { savePreferences, loadPreferences } from "../utils/preferences";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const ITEMS_PER_PAGE = 10;
 
@@ -22,10 +24,13 @@ const RecipeListScreen = () => {
   });
 
   const recipeList = useSelector((state) => state.recipeList);
-  const { loading, error, recipes } = recipeList;
+  const { loading, error, recipes, pages, page } = recipeList;
 
   const recipeDelete = useSelector((state) => state.recipeDelete);
   const { success: successDelete } = recipeDelete;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
 
   // Load saved preferences
   useEffect(() => {
@@ -54,9 +59,17 @@ const RecipeListScreen = () => {
   useEffect(() => {
     if (successDelete) {
       toast.success("Recipe deleted successfully");
-      dispatch(listRecipes());
+      dispatch(listRecipes(page));
     }
-  }, [dispatch, successDelete]);
+  }, [dispatch, successDelete, page]);
+
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listRecipes(page));
+    } else {
+      navigate("/login");
+    }
+  }, [dispatch, navigate, userInfo, page]);
 
   const deleteHandler = (id) => {
     if (window.confirm("Are you sure you want to delete this recipe?")) {
@@ -65,7 +78,7 @@ const RecipeListScreen = () => {
   };
 
   const handleSort = (field) => {
-    if (sortField === field) {
+    if (field === sortField) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortField(field);
@@ -75,24 +88,25 @@ const RecipeListScreen = () => {
   };
 
   const getSortIcon = (field) => {
-    if (sortField !== field) return <FaSort className="ms-1" />;
-    return sortDirection === "asc" ? (
-      <FaSortUp className="ms-1" />
-    ) : (
-      <FaSortDown className="ms-1" />
-    );
+    if (field !== sortField) return <FaSort />;
+    return sortDirection === "asc" ? <FaSortUp /> : <FaSortDown />;
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: value }));
+    setCurrentPage(1); // Reset to first page when filter changes
   };
 
   const filteredRecipes = recipes
-    ?.filter((recipe) => {
+    .filter((recipe) => {
       const matchesSearch = Object.values(recipe).some((value) =>
         String(value).toLowerCase().includes(searchTerm.toLowerCase())
       );
       const matchesClassification =
         !filters.classification ||
         recipe.classification === filters.classification;
-      const matchesSource =
-        !filters.source || recipe.source?.source === filters.source;
+      const matchesSource = !filters.source || recipe.source === filters.source;
       return matchesSearch && matchesClassification && matchesSource;
     })
     .sort((a, b) => {
@@ -144,11 +158,9 @@ const RecipeListScreen = () => {
         <Col md={4}>
           <Form.Group>
             <Form.Select
+              name="classification"
               value={filters.classification}
-              onChange={(e) => {
-                setFilters({ ...filters, classification: e.target.value });
-                setCurrentPage(1); // Reset to first page when filter changes
-              }}
+              onChange={handleFilterChange}
             >
               <option value="">All Classifications</option>
               {classifications.map((c) => (
@@ -162,11 +174,9 @@ const RecipeListScreen = () => {
         <Col md={4}>
           <Form.Group>
             <Form.Select
+              name="source"
               value={filters.source}
-              onChange={(e) => {
-                setFilters({ ...filters, source: e.target.value });
-                setCurrentPage(1); // Reset to first page when filter changes
-              }}
+              onChange={handleFilterChange}
             >
               <option value="">All Sources</option>
               {sources.map((s) => (
@@ -180,9 +190,9 @@ const RecipeListScreen = () => {
       </Row>
 
       {loading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : error ? (
-        <div className="alert alert-danger">{error}</div>
+        <Message variant="danger">{error}</Message>
       ) : (
         <>
           <Table striped bordered hover responsive className="table-sm">
@@ -190,15 +200,15 @@ const RecipeListScreen = () => {
               <tr>
                 <th
                   style={{ cursor: "pointer" }}
-                  onClick={() => handleSort("recipeKey")}
-                >
-                  Key {getSortIcon("recipeKey")}
-                </th>
-                <th
-                  style={{ cursor: "pointer" }}
                   onClick={() => handleSort("name")}
                 >
                   Name {getSortIcon("name")}
+                </th>
+                <th
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleSort("classification")}
+                >
+                  Classification {getSortIcon("classification")}
                 </th>
                 <th
                   style={{ cursor: "pointer" }}
@@ -208,9 +218,9 @@ const RecipeListScreen = () => {
                 </th>
                 <th
                   style={{ cursor: "pointer" }}
-                  onClick={() => handleSort("classification")}
+                  onClick={() => handleSort("createdAt")}
                 >
-                  Classification {getSortIcon("classification")}
+                  Created At {getSortIcon("createdAt")}
                 </th>
                 <th>Actions</th>
               </tr>
@@ -218,10 +228,10 @@ const RecipeListScreen = () => {
             <tbody>
               {paginatedRecipes?.map((recipe) => (
                 <tr key={recipe._id}>
-                  <td>{recipe.recipeKey}</td>
                   <td>{recipe.name}</td>
-                  <td>{recipe.source?.source}</td>
                   <td>{recipe.classification}</td>
+                  <td>{recipe.source?.source}</td>
+                  <td>{new Date(recipe.createdAt).toLocaleDateString()}</td>
                   <td>
                     <Button
                       variant="light"
