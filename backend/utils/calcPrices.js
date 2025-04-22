@@ -12,7 +12,7 @@ export function calcPrices(orderItems) {
   // floating point number calculations
   const itemsPrice = orderItems.reduce(
     (acc, item) => acc + (item.price * 100 * item.qty) / 100,
-    0
+    0,
   );
 
   // Calculate the shipping price

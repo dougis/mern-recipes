@@ -50,8 +50,8 @@ const router = createBrowserRouter(
         <Route path="/admin/userlist" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
       </Route>
-    </Route>
-  )
+    </Route>,
+  ),
 );
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -62,7 +62,7 @@ root.render(
         <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function
