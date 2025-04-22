@@ -1,14 +1,34 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "./slices/apiSlice";
-import authSliceReducer from "./slices/authSlice";
+import authReducer from "./slices/authSlice";
+import {
+  recipeListReducer,
+  recipeDetailsReducer,
+  recipeCreateReducer,
+  recipeUpdateReducer,
+  recipeDeleteReducer,
+} from "./reducers/recipeReducers";
+import {
+  sourceListReducer,
+  sourceDetailsReducer,
+  sourceCreateReducer,
+  sourceUpdateReducer,
+  sourceDeleteReducer,
+} from "./reducers/sourceReducers";
+
 const store = configureStore({
   reducer: {
-    [apiSlice.reducerPath]: apiSlice.reducer,
-    auth: authSliceReducer,
+    auth: authReducer,
+    recipeList: recipeListReducer,
+    recipeDetails: recipeDetailsReducer,
+    recipeCreate: recipeCreateReducer,
+    recipeUpdate: recipeUpdateReducer,
+    recipeDelete: recipeDeleteReducer,
+    sourceList: sourceListReducer,
+    sourceDetails: sourceDetailsReducer,
+    sourceCreate: sourceCreateReducer,
+    sourceUpdate: sourceUpdateReducer,
+    sourceDelete: sourceDeleteReducer,
   },
-  middleware: (buildGetDefaultMiddleware) =>
-    buildGetDefaultMiddleware().concat(apiSlice.middleware),
-  devTools: process.env.NODE_ENV !== "production",
 });
 
 export default store;
