@@ -40,7 +40,7 @@ const SourceEditScreen = () => {
   useEffect(() => {
     if (successCreate || successUpdate) {
       toast.success(
-        id ? "Source updated successfully" : "Source created successfully"
+        id ? "Source updated successfully" : "Source created successfully",
       );
       dispatch({ type: id ? "SOURCE_UPDATE_RESET" : "SOURCE_CREATE_RESET" });
       navigate("/sources");

@@ -79,8 +79,8 @@ const SourceListScreen = () => {
   const filteredSources = sources
     ?.filter((source) =>
       Object.values(source).some((value) =>
-        String(value).toLowerCase().includes(searchTerm.toLowerCase())
-      )
+        String(value).toLowerCase().includes(searchTerm.toLowerCase()),
+      ),
     )
     .sort((a, b) => {
       const aValue = a[sortField];
@@ -95,7 +95,7 @@ const SourceListScreen = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedSources = filteredSources?.slice(
     startIndex,
-    startIndex + ITEMS_PER_PAGE
+    startIndex + ITEMS_PER_PAGE,
   );
 
   const handlePageChange = (pageNumber) => {

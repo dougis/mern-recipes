@@ -44,7 +44,7 @@ const recipeReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         recipes: state.recipes.map((recipe) =>
-          recipe._id === action.payload._id ? action.payload : recipe
+          recipe._id === action.payload._id ? action.payload : recipe,
         ),
         recipe: action.payload,
       };
@@ -57,7 +57,7 @@ const recipeReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         recipes: state.recipes.filter(
-          (recipe) => recipe._id !== action.payload
+          (recipe) => recipe._id !== action.payload,
         ),
         recipe: {},
       };

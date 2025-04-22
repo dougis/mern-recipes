@@ -49,7 +49,7 @@ const RecipeEditScreen = () => {
   useEffect(() => {
     if (successCreate || successUpdate) {
       toast.success(
-        id ? "Recipe updated successfully" : "Recipe created successfully"
+        id ? "Recipe updated successfully" : "Recipe created successfully",
       );
       dispatch({ type: id ? "RECIPE_UPDATE_RESET" : "RECIPE_CREATE_RESET" });
       navigate("/recipes");

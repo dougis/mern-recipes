@@ -101,7 +101,7 @@ const RecipeListScreen = () => {
   const filteredRecipes = recipes
     .filter((recipe) => {
       const matchesSearch = Object.values(recipe).some((value) =>
-        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        String(value).toLowerCase().includes(searchTerm.toLowerCase()),
       );
       const matchesClassification =
         !filters.classification ||
@@ -122,7 +122,7 @@ const RecipeListScreen = () => {
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const paginatedRecipes = filteredRecipes?.slice(
     startIndex,
-    startIndex + ITEMS_PER_PAGE
+    startIndex + ITEMS_PER_PAGE,
   );
 
   const classifications = [...new Set(recipes?.map((r) => r.classification))];

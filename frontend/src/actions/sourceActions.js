@@ -83,7 +83,7 @@ export const updateSource = (source) => async (dispatch, getState) => {
     const { data } = await axios.put(
       `/api/sources/${source._id}`,
       source,
-      config
+      config,
     );
 
     dispatch({

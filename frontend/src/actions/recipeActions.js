@@ -85,7 +85,7 @@ export const updateRecipe = (recipe) => async (dispatch, getState) => {
     const { data } = await axios.put(
       `/api/recipes/${recipe._id}`,
       recipe,
-      config
+      config,
     );
 
     dispatch({

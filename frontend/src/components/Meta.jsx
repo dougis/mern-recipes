@@ -13,6 +13,6 @@ const Meta = ({ title, description, keywords }) => {
 Meta.defaultProps = {
   title: "Welcome to Leigh's recipes",
   description: "Good food, good mood!",
-  keywords: "recipes, food, cooking, baking, healthy, delicious, tasty, yummy"
+  keywords: "recipes, food, cooking, baking, healthy, delicious, tasty, yummy",
 };
 export default Meta;
